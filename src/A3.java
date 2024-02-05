@@ -1,12 +1,10 @@
-/*Group members:    Huaizhi Ling(A1)
- *                  Jinyang Liu(A3code)
- *                  QINGYUAN JING(A2)
- *                  Sansi Yue
- *                  YI SHI
+
+/**
+ * Main class for managing a parking lot system.
  * 
- * Date:            5/Feb/2024
+ * Group members: Huaizhi Ling(A1), Jinyang Liu(A3code), QINGYUAN JING(A2), Sansi Yue(A3Flowchart and output), YI SHI(A1)
+ * Date: 5/Feb/2024
  */
-//import java.io.*;
 
 import java.util.*;
 //import java.time.*;

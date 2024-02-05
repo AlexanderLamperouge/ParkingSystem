@@ -1,39 +1,67 @@
-
+/**
+ * Represents a parking lot that manages parking spaces.
+ */
 public class ParkingLot {
-    private ParkingSpace parkingSpace;
+    private ParkingSpace parkingSpace; // Encapsulates the parking space management
 
-    // Create instance 实例化类
-    public ParkingLot() {
-        this.parkingSpace = new ParkingSpace();
-    }
-
-    /*
-     * This method can save the car enter.
-     * 
-     * @input class of car.
-     * 
-     * @return if car enterable, return true. If the car can't enter, return false.
+    /**
+     * Constructs a ParkingLot instance and initializes its parking space
+     * management.
      */
+    public ParkingLot() {
+        this.parkingSpace = new ParkingSpace(); // Initialize parking space management
+    }
 
-    // 存车
+    /**
+     * Attempts to park a car in the parking lot.
+     * 
+     * @param enterCar The car attempting to enter the parking lot.
+     * @return true if the car is successfully parked, otherwise false.
+     *         Note: Current implementation always returns true. Consider
+     *         implementing logic to check parking space availability.
+     */
     public boolean enter(Car enterCar) {
-        this.parkingSpace.saveCar(enterCar);
+        this.parkingSpace.saveCar(enterCar); // Saves car to a parking space
 
-        return true;
+        return true; // Indicates car was successfully parked
     }
 
-    // 取车
+    /**
+     * Attempts to remove a car from the parking lot based on its license plate.
+     * 
+     * @param licensePlate The license plate of the car to be removed.
+     * @return true if the car is successfully removed, otherwise false.
+     *         Note: Current implementation always returns true. Consider
+     *         implementing logic to actually check and remove the car.
+     */
     public boolean leave(String licensePlate) {
-        return true;
+        // Implementation needed to remove the car based on license plate
+        return true; // Placeholder return value
     }
 
-    // 计算停车费和停车时长
+    /**
+     * Calculates and prints the parking fee and duration for a specific car.
+     * 
+     * @param carNumber The license plate number of the car.
+     *                  Note: This is a placeholder implementation. Actual
+     *                  calculation logic needs to be implemented.
+     */
     public void getPrice(String carNumber) {
-        System.out.println("Price and time.");
+        // Placeholder implementation; needs logic to calculate and print the fee and
+        // duration
+        System.out.println("Price and time."); // Example output
     }
 
-    // 找到车位
+    /**
+     * Finds and prints the parking space of a specific car.
+     * 
+     * @param carNumber The license plate number of the car to locate.
+     *                  Note: This is a placeholder implementation. Actual logic to
+     *                  locate the car's space needs to be implemented.
+     */
     public void getSpace(String carNumber) {
-        System.out.println("Your car's space.");
+        // Placeholder implementation; needs logic to find and print the car's parking
+        // space
+        System.out.println("Your car's space."); // Example output
     }
 }
