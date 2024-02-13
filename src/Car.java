@@ -10,6 +10,11 @@ public class Car {
         this.carSpace = enterSpace;
     }
 
+    // public boolean enterLocation(int enterFloor, String enterArea, int
+    // enterNumber){
+    // this.carSpace.
+    // }
+
     public String getCarNumber() {
         return CarNumber;
     }

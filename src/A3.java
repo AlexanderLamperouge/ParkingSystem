@@ -37,7 +37,7 @@ public class A3 {
 
                     System.out.println("Enter your favourite space: ");
                     // TODO: Need to enter the location of car 需要一个输入车辆位置信息的函数
-                    Location carSpace = Tools.getLocation();
+                    Location carSpace = Tools.getLocation(myfloor, myarea, mynumber);
                     // TODO: Need a method to save the favourite space 需要一个格式化保存车辆位置信息的函数
 
                     // Create instance 创建Car实例

@@ -23,12 +23,12 @@ public class Tools {
     }
 
     // 获得位置
-    public static Location getLocation() {
+    public static Location getLocation(int enterFloor, String enterArea, int enterNumber) {
 
         // Initialize the variable
-        int Floor = 0;
-        String Area = "A";
-        int Number = 1;
+        int Floor = enterFloor;
+        String Area = enterArea;
+        int Number = enterNumber;
 
         Location myLocation = new Location(Floor, Area, Number);
 
