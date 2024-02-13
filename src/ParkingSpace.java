@@ -25,12 +25,25 @@ public class ParkingSpace {
      *                 Note: This method currently does not place the car into a
      *                 specific slot in the array.
      */
-    public void saveCar(Car enterCar) {
+    public boolean saveCar(Car enterCar) {
         if (usedParkingSlots < capacity) {
-            System.out.println("Parking success!"); // Confirm parking success
-            this.usedParkingSlots++; // Increment used slots
+
+            Location myLocation = enterCar.getSpace();
+            int myFloor = myLocation.getFloor();
+            int myArea = myLocation.getArea();
+            int myNumber = myLocation.getNumber();
+
+            if (parkingSpace[myFloor][myArea][myNumber] == null) {
+                parkingSpace[myFloor][myArea][myNumber] = enterCar;
+                System.out.println("Parking success!"); // Confirm parking success
+                this.usedParkingSlots++; // Increment used slots
+                return true;
+            } else {
+                return false;// This location has car!!!
+            }
         } else {
             System.out.println("Parking failed!"); // Indicate parking failure due to capacity limits
+            return false;// The ParkingSpace is full!!!
         }
     }
 
@@ -68,5 +81,9 @@ public class ParkingSpace {
         // Placeholder implementation; actual search logic to find the car's location is
         // needed
         return "The location of car."; // Example output
+    }
+
+    public void displayFreeSpace() {
+
     }
 }

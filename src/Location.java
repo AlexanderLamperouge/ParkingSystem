@@ -3,7 +3,7 @@
  */
 public class Location {
     // Define immutable properties for a location
-    private final String Floor; // Floor within the parking lot
+    private final int Floor; // Floor within the parking lot
     private final String Area; // Specific area/section on the floor
     private final int Number; // Spot number within the area
 
@@ -14,7 +14,7 @@ public class Location {
      * @param enterArea   The area or section within the floor.
      * @param enterNumber The specific spot number in the area.
      */
-    public Location(String enterFloor, String enterArea, int enterNumber) {
+    public Location(int enterFloor, String enterArea, int enterNumber) {
         this.Floor = enterFloor;
         this.Area = enterArea;
         this.Number = enterNumber;
@@ -35,5 +35,37 @@ public class Location {
         System.out.println("The car's location is: xyz."); // Example message; replace 'xyz' with actual location
                                                            // details.
         return this;
+    }
+
+    public int getFloor() {
+        return this.Floor;
+    }
+
+    public int getArea() {
+        int myArea = 0;
+
+        switch (this.Area) {
+            case "A":
+                myArea = 0;
+                break;
+            case "B":
+                myArea = 1;
+                break;
+            case "C":
+                myArea = 2;
+                break;
+            case "D":
+                myArea = 3;
+            case "E":
+                myArea = 4;
+            default:
+                break;
+        }
+
+        return myArea;
+    }
+
+    public int getNumber() {
+        return this.Number;
     }
 }

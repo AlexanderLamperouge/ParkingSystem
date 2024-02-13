@@ -26,8 +26,8 @@ public class Tools {
     public static Location getLocation() {
 
         // Initialize the variable
-        String Floor = "";
-        String Area = "";
+        int Floor = 0;
+        String Area = "A";
         int Number = 1;
 
         Location myLocation = new Location(Floor, Area, Number);
