@@ -1,3 +1,5 @@
+import java.util.Formatter;
+
 /**
  * Manages the parking spaces within a parking lot, tracking capacity and
  * occupancy.
@@ -95,6 +97,33 @@ public class ParkingSpace {
     }
 
     public void displayFreeSpace() {
+        /*
+         * find all or the available space for user
+         */
+        System.out.println("Available Free Parking Spaces:");
+
+        // Table header
+        System.out.println("+-------+-------+----------------------------------------------------+");
+        System.out.println("| Floor | Area  |                       Slot                         |");
+        System.out.println("+-------+-------+----------------------------------------------------+");
+
+        // Table body
+        for (int floor = 0; floor < parkingSpace.length; floor++) {
+            for (int area = 0; area < parkingSpace[floor].length; area++) {
+                String slot_list = "";
+
+                for (int slot = 0; slot < parkingSpace[floor][area].length; slot++) {
+                    if(parkingSpace[floor][area][slot] == null)
+                        slot_list = slot_list.concat(String.valueOf(slot)) + " ";
+                }
+                try (Formatter formatter = new Formatter()) {
+                    formatter.format("| %-5d | %-5d | %s |%n", (floor), (area), (slot_list));
+                    System.out.print(formatter);
+                }
+            }
+        }
+
+        System.out.println("+-------+-------+-------+");
 
     }
 }
