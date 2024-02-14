@@ -1,7 +1,8 @@
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Manages the parking spaces within a parking lot, tracking capacity and
@@ -158,40 +159,44 @@ public class ParkingSpace {
      * Displays information about all parked cars, sorted by floor.
      */
     public void displayParkedCars() {
-        List<Car> parkedCars = new ArrayList<>();
+        // Use a Map to group cars by floor
+        Map<Integer, List<String>> carsByFloor = new HashMap<>();
 
-        // Collect all parked cars
+        // Collect all parked cars and group them by floor
         for (int floor = 0; floor < parkingSpace.length; floor++) {
             for (int area = 0; area < parkingSpace[floor].length; area++) {
                 for (int slot = 0; slot < parkingSpace[floor][area].length; slot++) {
-                    if (parkingSpace[floor][area][slot] != null) {
-                        parkedCars.add(parkingSpace[floor][area][slot]);
+                    Car car = parkingSpace[floor][area][slot];
+                    if (car != null) {
+                        List<String> carNumbers = carsByFloor.computeIfAbsent(floor, k -> new ArrayList<>());
+                        carNumbers.add(car.getCarNumber());
                     }
                 }
             }
         }
 
-        // Sort the list of parked cars by floor
-        Collections.sort(parkedCars, new Comparator<Car>() {
-            @Override
-            public int compare(Car car1, Car car2) {
-                return Integer.compare(car1.getLocation().getFloor(), car2.getLocation().getFloor());
-            }
+        // Print grouped cars by floor
+        System.out.println("Parked Cars by Floor:");
+        System.out.println("+-------+-------------------------------------+-------------+");
+        System.out.println("| Floor | Car Numbers                         | Enter Time  |");
+        System.out.println("+-------+-------------------------------------+-------------+");
+
+        carsByFloor.forEach((floor, carNumbers) -> {
+            // Join car numbers into a single string
+            String carNumbersStr = String.join(", ", carNumbers);
+
+            // Assuming enter time is the same for simplification, adjust as needed
+            String enterTimes = carNumbers.stream()
+                    .map(carNumber -> findCar(carNumber).getEnterTime() + "") // Convert enter times to string
+                    .distinct() // Remove duplicates, if any
+                    .collect(Collectors.joining(", ")); // Join enter times
+
+            System.out.printf("| %-5d | %-35s | %-11s |%n",
+                    floor + 1, // Assuming floors start at 0 internally
+                    carNumbersStr,
+                    enterTimes.length() > 0 ? enterTimes : "N/A"); // Print enter times if available
         });
 
-        // Print the sorted list of parked cars
-        System.out.println("Parked Cars:");
-        System.out.println("+-------------+-------+-------------+");
-        System.out.println("| Car Number  | Floor | Enter Time  |");
-        System.out.println("+-------------+-------+-------------+");
-
-        for (Car car : parkedCars) {
-            System.out.printf("| %-11s | %-5d | %-11d |%n",
-                    car.getCarNumber(),
-                    car.getLocation().getFloor() + 1, // Assuming floors start at 0 internally
-                    car.getEnterTime());
-        }
-
-        System.out.println("+-------------+-------+-------------+");
+        System.out.println("+-------+-------------------------------------+-------------+");
     }
 }
