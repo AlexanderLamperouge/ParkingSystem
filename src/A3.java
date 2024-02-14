@@ -79,11 +79,11 @@ public class A3 {
                     Car priceOfCar = parkingLot.findCar(numberOfPrice);
                     int nowTime = Tools.getTime();
 
-                    System.out.println("Exit Time: " + nowTime);
-                    System.out.println("Total Time: " + (nowTime - priceOfCar.getEnterTime()));
+                    System.out.println("Now Time: " + nowTime);
+                    System.out.println("Total Time: " + (nowTime - priceOfCar.getEnterTime()) + " Seconds.");
                     System.out.println("Your price is: ");
 
-                    System.out.println(Tools.countPrice(nowTime, priceOfCar.getEnterTime()));
+                    System.out.println(Tools.countPrice(nowTime, priceOfCar.getEnterTime()) + " Dollars.");
 
                     break;
                 case 4:
