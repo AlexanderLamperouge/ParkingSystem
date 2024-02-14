@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Formatter;
 
 /**
@@ -103,27 +104,48 @@ public class ParkingSpace {
         System.out.println("Available Free Parking Spaces:");
 
         // Table header
-        System.out.println("+-------+-------+----------------------------------------------------+");
-        System.out.println("| Floor | Area  |                       Slot                         |");
-        System.out.println("+-------+-------+----------------------------------------------------+");
+        System.out.println("+-------+-------+----------------------+");
+        System.out.println("| Floor | Area  |         Slot         |");
+        System.out.println("+-------+-------+----------------------+");
 
         // Table body
         for (int floor = 0; floor < parkingSpace.length; floor++) {
             for (int area = 0; area < parkingSpace[floor].length; area++) {
+
                 String slot_list = "";
+                ArrayList slots = new ArrayList<>();
+                char area_charac = (char) (area + 65);
 
                 for (int slot = 0; slot < parkingSpace[floor][area].length; slot++) {
                     if(parkingSpace[floor][area][slot] == null)
-                        slot_list = slot_list.concat(String.valueOf(slot)) + " ";
+                        slots.add(slot);
+//                        slot_list = slot_list.concat(String.valueOf(slot)) + " ";
                 }
+
+                int seq = 0;
+                while(seq < slots.size()-1){
+                    int start_seq = seq;
+                    for(int item = seq + 1; item < slots.size(); item++){
+                        if((Integer) slots.get(item) != ((Integer)slots.get(seq) + 1)){
+                            seq = item - 1;
+                            break;
+                        }
+                        seq = item;
+                    }
+                    int end_seq = seq;
+                    seq = end_seq;
+                    slot_list = slot_list.concat(String.valueOf(start_seq) + "-" + String.valueOf(end_seq) + ",");
+
+                }
+
                 try (Formatter formatter = new Formatter()) {
-                    formatter.format("| %-5d | %-5d | %s |%n", (floor), (area), (slot_list));
+                    formatter.format("| %-5d | %-5c | %-20s |%n", (floor + 1), (area_charac), (slot_list));
                     System.out.print(formatter);
                 }
             }
         }
 
-        System.out.println("+-------+-------+----------------------------------------------------+");
+        System.out.println("+-------+-------+------------------------+");
 
     }
 }
