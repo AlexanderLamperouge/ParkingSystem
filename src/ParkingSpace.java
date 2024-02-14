@@ -1,3 +1,8 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
 /**
  * Manages the parking spaces within a parking lot, tracking capacity and
  * occupancy.
@@ -35,14 +40,15 @@ public class ParkingSpace {
 
             if (parkingSpace[myFloor][myArea][mySlot] == null) {
                 parkingSpace[myFloor][myArea][mySlot] = enterCar;
-                System.out.println("Parking success!"); // Confirm parking success
+                // System.out.println("Parking success!"); // Confirm parking success
                 this.usedParkingSlots++; // Increment used slots
                 return true;
             } else {
                 return false;// This location has car!!!
             }
         } else {
-            System.out.println("Parking failed!"); // Indicate parking failure due to capacity limits
+            // System.out.println("Parking failed!"); // Indicate parking failure due to
+            // capacity limits
             return false;// The ParkingSpace is full!!!
         }
     }
@@ -59,8 +65,6 @@ public class ParkingSpace {
      */
     public boolean leaveCar(Car leaveCar) {
         // Placeholder logic for car removal
-        // String flag = findCar(leaveCar.getCarNumber()); // boolean
-        // Location car_location = leaveCar.getSpace();
         Location myLocation = leaveCar.getLocation();
 
         int myFloor = myLocation.getFloor();
@@ -101,6 +105,93 @@ public class ParkingSpace {
     }
 
     public void displayFreeSpace() {
+        System.out.println("Available Free Parking Spaces:");
+
+        // Table header
+        System.out.println("+-------+-------+----------------------+");
+        System.out.println("| Floor | Area  |         Slot         |");
+        System.out.println("+-------+-------+----------------------+");
+
+        // Table body
+        for (int floor = 0; floor < parkingSpace.length; floor++) {
+            for (int area = 0; area < parkingSpace[floor].length; area++) {
+                StringBuilder slotList = new StringBuilder();
+                char areaChar = (char) (area + 'A');
+
+                int start = -1; // Start of a sequence of free slots
+                for (int slot = 0; slot < parkingSpace[floor][area].length; slot++) {
+                    // If slot is free and start is -1, we start a new sequence
+                    if (parkingSpace[floor][area][slot] == null && start == -1) {
+                        start = slot;
+                    }
+
+                    // If slot is not free or it's the last slot and we have a sequence started
+                    if ((parkingSpace[floor][area][slot] != null || slot == parkingSpace[floor][area].length - 1)
+                            && start != -1) {
+                        // If it's the end of a sequence or the last slot, append the sequence to
+                        // slotList
+                        if (slot - start > 0 || (slot == parkingSpace[floor][area].length - 1
+                                && parkingSpace[floor][area][slot] == null)) {
+                            slotList.append(String.format("%d-%d, ", start, slot == parkingSpace[floor][area].length - 1
+                                    && parkingSpace[floor][area][slot] == null ? slot : slot - 1));
+                        } else { // Single free slot
+                            slotList.append(String.format("%d, ", start));
+                        }
+                        start = -1; // Reset start for the next sequence
+                    }
+                }
+
+                // Remove trailing comma and space
+                if (slotList.length() > 0) {
+                    slotList.setLength(slotList.length() - 2);
+                }
+
+                System.out.printf("| %-5d | %-5c | %-20s |%n", (floor + 1), areaChar, slotList.toString());
+            }
+        }
+
+        System.out.println("+-------+-------+----------------------+");
         System.out.println("That's the free space.");
+    }
+
+    /**
+     * Displays information about all parked cars, sorted by floor.
+     */
+    public void displayParkedCars() {
+        List<Car> parkedCars = new ArrayList<>();
+
+        // Collect all parked cars
+        for (int floor = 0; floor < parkingSpace.length; floor++) {
+            for (int area = 0; area < parkingSpace[floor].length; area++) {
+                for (int slot = 0; slot < parkingSpace[floor][area].length; slot++) {
+                    if (parkingSpace[floor][area][slot] != null) {
+                        parkedCars.add(parkingSpace[floor][area][slot]);
+                    }
+                }
+            }
+        }
+
+        // Sort the list of parked cars by floor
+        Collections.sort(parkedCars, new Comparator<Car>() {
+            @Override
+            public int compare(Car car1, Car car2) {
+                return Integer.compare(car1.getLocation().getFloor(), car2.getLocation().getFloor());
+            }
+        });
+
+        // Print the sorted list of parked cars
+        System.out.println("Parked Cars:");
+        System.out.println("+-------------+-------+-------------+");
+        System.out.println("| Car Number  | Floor | Enter Time  |");
+        System.out.println("+-------------+-------+-------------+");
+
+        for (Car car : parkedCars) {
+            System.out.printf("| %-11s | %-5d | %-11d |%n",
+                    car.getCarNumber(),
+                    car.getLocation().getFloor() + 1, // Assuming floors start at 0 internally
+                    car.getEnterTime());
+        }
+
+        System.out.println("+-------------+-------+-------------+");
     }
 }

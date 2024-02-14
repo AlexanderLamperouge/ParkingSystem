@@ -10,9 +10,9 @@ public class Location {
     /**
      * Constructs a Location object with specified floor, area, and number.
      *
-     * @param enterFloor  The floor on which the parking spot is located.
-     * @param enterArea   The area or section within the floor.
-     * @param enterSlot The specific spot number in the area.
+     * @param enterFloor The floor on which the parking spot is located.
+     * @param enterArea  The area or section within the floor.
+     * @param enterSlot  The specific spot number in the area.
      */
     public Location(int enterFloor, String enterArea, int enterSlot) {
         this.Floor = enterFloor;

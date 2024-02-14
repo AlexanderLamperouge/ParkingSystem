@@ -24,10 +24,10 @@ public class ParkingLot {
         boolean flag;
         flag = this.parkingSpace.saveCar(enterCar); // Saves car to a parking space
         if (flag == true) {
-            System.out.println("save Successfully");
+            System.out.println("Save Successfully!");
             return true;
         } else {
-            System.out.println("error");
+            System.out.println("Error!");
             return false;
         }
         // Indicates car was successfully parked
@@ -47,10 +47,10 @@ public class ParkingLot {
         flag = this.parkingSpace.leaveCar(leavecar);
         // Implementation needed to remove the car based on license plate
         if (flag == true) {
-            System.out.println("leave Successfully");
+            System.out.println("Leave Successfully");
             return true;
         } else {
-            System.out.println("error");
+            System.out.println("Error!");
             return false;
         }
         // Placeholder return value
@@ -86,5 +86,9 @@ public class ParkingLot {
 
     public void displayFreeSpace() {
         parkingSpace.displayFreeSpace();
+    }
+
+    public void displayCar() {
+        parkingSpace.displayParkedCars();
     }
 }

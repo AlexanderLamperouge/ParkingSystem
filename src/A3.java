@@ -17,6 +17,7 @@ public class A3 {
 
         while (true) {
             System.out.println("\n\n\n\nPitions:");
+            System.out.println("0. Display cars");
             System.out.println("1. Save car");
             System.out.println("2. Leave car");
             System.out.println("3. Print price and time");
@@ -28,6 +29,9 @@ public class A3 {
             int choice = sc.nextInt();
 
             switch (choice) {
+                case 0:
+                    parkingLot.displayFreeSpace();
+                    break;
                 case 1:
                     System.out.println("That is the free parking space: ");
                     parkingLot.displayFreeSpace();
@@ -42,7 +46,7 @@ public class A3 {
                     int enteredFloor = sc.nextInt();
                     System.out.println("Enter the Area(A,B,C,D)");
                     String enteredArea = sc.next();
-                    System.out.println("Enter the Number(0~20):");
+                    System.out.println("Enter the Number(0~19):");
                     int enteredNumber = sc.nextInt();
 
                     int enterTime = Tools.getTime();
