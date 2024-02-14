@@ -92,7 +92,18 @@ public class ParkingSpace {
     public String findCar(String carNumber) {
         // Placeholder implementation; actual search logic to find the car's location is
         // needed
-        return "The location of car."; // Example output
+        for (int floor = 0; floor < parkingSpace.length; floor++) {
+            for (int area = 0; area < parkingSpace[floor].length; area++) {
+                for (int slot = 0; slot < parkingSpace[floor][area].length; slot++) {
+                    Car car = parkingSpace[floor][area][slot];
+                    if (car != null && car.getCarNumber().equals(carNumber)) {
+                        return "The car is located at Floor " + (floor + 1) + ", Area " + (area + 1) + ", Slot " + (slot + 1) + ".";
+                    }
+                }
+            }
+        }
+        return "The car is not found. Maybe the wrong input.";
+//        return "The location of car."; // Example output
     }
 
     public void displayFreeSpace() {
