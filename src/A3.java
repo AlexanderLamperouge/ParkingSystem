@@ -80,7 +80,7 @@ public class A3 {
                     int nowTime = Tools.getTime();
 
                     System.out.println("Now Time: " + nowTime);
-                    System.out.println("Total Time: " + (nowTime - priceOfCar.getEnterTime()) + " Seconds.");
+                    System.out.println("Total Time: " + (nowTime - priceOfCar.getEnterTime()) + " Minutes.");
                     System.out.println("Your price is: ");
 
                     System.out.println(Tools.countPrice(nowTime, priceOfCar.getEnterTime()) + " Dollars.");
