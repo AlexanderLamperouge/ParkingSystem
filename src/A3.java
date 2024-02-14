@@ -30,7 +30,7 @@ public class A3 {
 
             switch (choice) {
                 case 0:
-                    parkingLot.displayFreeSpace();
+                    parkingLot.displayCar();
                     break;
                 case 1:
                     System.out.println("That is the free parking space: ");
