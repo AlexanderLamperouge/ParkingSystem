@@ -122,20 +122,28 @@ public class ParkingSpace {
 //                        slot_list = slot_list.concat(String.valueOf(slot)) + " ";
                 }
 
-                int seq = 0;
-                while(seq < slots.size()-1){
-                    int start_seq = seq;
-                    for(int item = seq + 1; item < slots.size(); item++){
-                        if((Integer) slots.get(item) != ((Integer)slots.get(seq) + 1)){
-                            seq = item - 1;
+                int current_seq = 0;
+                while(current_seq <= slots.size()){
+                    int start_seq = current_seq;
+                    for(int item = start_seq + 1; item <= slots.size(); item++){
+                        if(item == slots.size()){
+                            current_seq = item;
                             break;
                         }
-                        seq = item;
-                    }
-                    int end_seq = seq;
-                    seq = end_seq;
-                    slot_list = slot_list.concat(String.valueOf(start_seq) + "-" + String.valueOf(end_seq) + ",");
 
+                        if((Integer) slots.get(item) != ((Integer)slots.get(current_seq) + 1)){
+                            break;
+                        }
+                        current_seq = item;
+                    }
+                    int end_seq = current_seq;
+                    current_seq = end_seq + 1;
+                    if(start_seq == end_seq){
+                        slot_list = slot_list.concat(String.valueOf(start_seq) + ",");
+                    }
+                    else {
+                        slot_list = slot_list.concat(String.valueOf(start_seq) + "-" + String.valueOf(end_seq) + ",");
+                    }
                 }
 
                 try (Formatter formatter = new Formatter()) {
