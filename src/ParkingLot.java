@@ -21,9 +21,16 @@ public class ParkingLot {
      *         implementing logic to check parking space availability.
      */
     public boolean enter(Car enterCar) {
-        this.parkingSpace.saveCar(enterCar); // Saves car to a parking space
-
-        return true; // Indicates car was successfully parked
+        boolean flag;
+        flag = this.parkingSpace.saveCar(enterCar); // Saves car to a parking space
+        if (flag == true) {
+            System.out.println("save Successfully");
+            return true;
+        } else {
+            System.out.println("error");
+            return false;
+        }
+        // Indicates car was successfully parked
     }
 
     /**
@@ -35,21 +42,18 @@ public class ParkingLot {
      *         implementing logic to actually check and remove the car.
      */
     public boolean leave(String licensePlate) {
+        boolean flag;
+        Car leavecar = new Car(licensePlate, 0, null);
+        flag = this.parkingSpace.leaveCar(leavecar);
         // Implementation needed to remove the car based on license plate
-        return true; // Placeholder return value
-    }
-
-    /**
-     * Calculates and prints the parking fee and duration for a specific car.
-     * 
-     * @param carNumber The license plate number of the car.
-     *                  Note: This is a placeholder implementation. Actual
-     *                  calculation logic needs to be implemented.
-     */
-    public void getPrice(String carNumber) {
-        // Placeholder implementation; needs logic to calculate and print the fee and
-        // duration
-        System.out.println("Price and time."); // Example output
+        if (flag == true) {
+            System.out.println("leave Successfully");
+            return true;
+        } else {
+            System.out.println("error");
+            return false;
+        }
+        // Placeholder return value
     }
 
     /**
@@ -59,9 +63,28 @@ public class ParkingLot {
      *                  Note: This is a placeholder implementation. Actual logic to
      *                  locate the car's space needs to be implemented.
      */
-    public void getSpace(String carNumber) {
+    public void getLocation(String carNumber) {
         // Placeholder implementation; needs logic to find and print the car's parking
         // space
-        System.out.println("Your car's space."); // Example output
+        Car yourCar = parkingSpace.findCar(carNumber);
+        Location yourLocation = yourCar.getLocation();
+
+        int yourFloor = yourLocation.getFloor() + 1;
+        String yourArea = yourLocation.getArea();
+        int yourNumber = yourLocation.getSlot();
+
+        System.out.println(
+                "The car is located at Floor " + yourFloor + ", Area " + yourArea + ", Slot " + yourNumber + ".");
+    }
+
+    public Car findCar(String carNumber) {
+        // Placeholder implementation; needs logic to find and print the car's parking
+        // space
+        Car yourCar = parkingSpace.findCar(carNumber);
+        return yourCar;
+    }
+
+    public void displayFreeSpace() {
+        parkingSpace.displayFreeSpace();
     }
 }

@@ -5,19 +5,19 @@ public class Location {
     // Define immutable properties for a location
     private final int Floor; // Floor within the parking lot
     private final String Area; // Specific area/section on the floor
-    private final int Number; // Spot number within the area
+    private final int Slot; // Spot number within the area
 
     /**
      * Constructs a Location object with specified floor, area, and number.
      *
      * @param enterFloor  The floor on which the parking spot is located.
      * @param enterArea   The area or section within the floor.
-     * @param enterNumber The specific spot number in the area.
+     * @param enterSlot The specific spot number in the area.
      */
-    public Location(int enterFloor, String enterArea, int enterNumber) {
+    public Location(int enterFloor, String enterArea, int enterSlot) {
         this.Floor = enterFloor;
         this.Area = enterArea;
-        this.Number = enterNumber;
+        this.Slot = enterSlot;
     }
 
     /**
@@ -41,7 +41,11 @@ public class Location {
         return this.Floor;
     }
 
-    public int getArea() {
+    public String getArea() {
+        return this.Area;
+    }
+
+    public int getAreaNumber() {
         int myArea = 0;
 
         switch (this.Area) {
@@ -65,7 +69,7 @@ public class Location {
         return myArea;
     }
 
-    public int getNumber() {
-        return this.Number;
+    public int getSlot() {
+        return this.Slot;
     }
 }

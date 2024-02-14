@@ -1,29 +1,27 @@
-
 public class Car {
     private String CarNumber;
     private int enterTime;
-    private Location carSpace;
+    private Location carLocation;
 
     public Car(String licensePlate, int enterTime, Location enterSpace) {
         this.CarNumber = licensePlate;
         this.enterTime = enterTime;
-        this.carSpace = enterSpace;
+        this.carLocation = enterSpace;
     }
-
-    // public boolean enterLocation(int enterFloor, String enterArea, int
-    // enterNumber){
-    // this.carSpace.
-    // }
 
     public String getCarNumber() {
         return CarNumber;
     }
 
-    public int getTime() {
+    public int getEnterTime() {
         return enterTime;
     }
 
-    public Location getSpace() {
-        return carSpace;
+    public Location getLocation() {
+        return carLocation;
+    }
+
+    public void setCarNumber(String CarNumber) {
+        this.CarNumber = CarNumber;
     }
 }

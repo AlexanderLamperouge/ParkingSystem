@@ -1,10 +1,10 @@
 
 /**
- * Main class for managing a parking lot system.
- * 
- * Group members: Huaizhi Ling(A1), Jinyang Liu(A3code), QINGYUAN JING(A2), Sansi Yue(A3Flowchart and output), YI SHI(A1)
- * Date: 5/Feb/2024
- */
+* Main class for managing a parking lot system.
+* 
+* Group members: Huaizhi Ling(A1), Jinyang Liu(A3code), QINGYUAN JING(A2), Sansi Yue(A3Flowchart and output), YI SHI(A1)
+* Date: 5/Feb/2024
+*/
 
 import java.util.*;
 //import java.time.*;
@@ -16,7 +16,7 @@ public class A3 {
         ParkingLot parkingLot = new ParkingLot();
 
         while (true) {
-            System.out.println("Pitions:");
+            System.out.println("\n\n\n\nPitions:");
             System.out.println("1. Save car");
             System.out.println("2. Leave car");
             System.out.println("3. Print price and time");
@@ -30,36 +30,63 @@ public class A3 {
             switch (choice) {
                 case 1:
                     System.out.println("That is the free parking space: ");
-                    // Need a method to get space
+                    parkingLot.displayFreeSpace();
+                    // Need a method to get free space
 
                     System.out.println("Enter your car number: ");
                     String carNumber = sc.next();
 
+                    // Enter the location of car
                     System.out.println("Enter your favourite space: ");
-                    // TODO: Need to enter the location of car 需要一个输入车辆位置信息的函数
-                    Location carSpace = Tools.getLocation(myfloor, myarea, mynumber);
-                    // TODO: Need a method to save the favourite space 需要一个格式化保存车辆位置信息的函数
+                    System.out.println("Enter the floor(1~5):");
+                    int enteredFloor = sc.nextInt();
+                    System.out.println("Enter the Area(A,B,C,D)");
+                    String enteredArea = sc.next();
+                    System.out.println("Enter the Number(0~20):");
+                    int enteredNumber = sc.nextInt();
 
-                    // Create instance 创建Car实例
-                    parkingLot.enter(new Car(carNumber, Tools.getTime(), carSpace));
+                    int enterTime = Tools.getTime();
+
+                    // Package myCar
+                    Car myCar = new Car(carNumber, enterTime,
+                            Tools.getLocation(enteredFloor - 1, enteredArea, enteredNumber));
+
+                    parkingLot.enter(myCar);
                     break;
                 case 2:
                     System.out.println("Enter your car number: ");
                     String leaveNumber = sc.next();
+
+                    Car leaveOfCar = parkingLot.findCar(leaveNumber);
+                    int exitTime = Tools.getTime();
+                    System.out.println("Exit Time: " + exitTime);
+                    System.out.println("Total Time: " + (exitTime - leaveOfCar.getEnterTime()));
+
+                    System.out.println("Your price is: ");
+                    System.out.println(Tools.countPrice(exitTime, leaveOfCar.getEnterTime()));
+
                     System.out.println("Leaving your car");
                     parkingLot.leave(leaveNumber);
                     break;
                 case 3:
                     System.out.println("Enter your car number: ");
+
                     String numberOfPrice = sc.next();
-                    System.out.println("Your price and time is: ");
-                    parkingLot.getPrice(numberOfPrice);
+                    Car priceOfCar = parkingLot.findCar(numberOfPrice);
+                    int nowTime = Tools.getTime();
+
+                    System.out.println("Exit Time: " + nowTime);
+                    System.out.println("Total Time: " + (nowTime - priceOfCar.getEnterTime()));
+                    System.out.println("Your price is: ");
+
+                    System.out.println(Tools.countPrice(nowTime, priceOfCar.getEnterTime()));
+
                     break;
                 case 4:
                     System.out.println("Enter your car number: ");
-                    String numberOfFind = sc.next();
+                    String locationOfYourCar = sc.next();
                     System.out.println("Your car is on: ");
-                    parkingLot.getSpace(numberOfFind);
+                    parkingLot.getLocation(locationOfYourCar);
                     break;
                 case 5:
                     System.out.println("Help");

@@ -28,13 +28,13 @@ public class ParkingSpace {
     public boolean saveCar(Car enterCar) {
         if (usedParkingSlots < capacity) {
 
-            Location myLocation = enterCar.getSpace();
+            Location myLocation = enterCar.getLocation();
             int myFloor = myLocation.getFloor();
-            int myArea = myLocation.getArea();
-            int myNumber = myLocation.getNumber();
+            int myArea = myLocation.getAreaNumber();
+            int mySlot = myLocation.getSlot();
 
-            if (parkingSpace[myFloor][myArea][myNumber] == null) {
-                parkingSpace[myFloor][myArea][myNumber] = enterCar;
+            if (parkingSpace[myFloor][myArea][mySlot] == null) {
+                parkingSpace[myFloor][myArea][mySlot] = enterCar;
                 System.out.println("Parking success!"); // Confirm parking success
                 this.usedParkingSlots++; // Increment used slots
                 return true;
@@ -61,24 +61,19 @@ public class ParkingSpace {
         // Placeholder logic for car removal
         // String flag = findCar(leaveCar.getCarNumber()); // boolean
         // Location car_location = leaveCar.getSpace();
-        Location myLocation = leaveCar.getSpace();
-        int myFloor = myLocation.getFloor();
-        int myArea = myLocation.getArea();
-        int myNumber = myLocation.getNumber();
+        Location myLocation = leaveCar.getLocation();
 
-        boolean flagOfCar = true; // Assume car is present for demonstration
+        int myFloor = myLocation.getFloor();
+        int myArea = myLocation.getAreaNumber();
+        int myNumber = myLocation.getSlot();
 
         if (parkingSpace[myFloor][myArea][myNumber] == null) {
-            flagOfCar = false;
-        }
-
-        if (flagOfCar) {
+            System.out.println("Parking Space doesn't have this car!"); // Car not found
+            return false;
+        } else {
             this.usedParkingSlots--; // Decrement used slots
             parkingSpace[myFloor][myArea][myNumber] = null;
             return true; // Indicate successful removal
-        } else {
-            System.out.println("Parking Space doesn't have this car!"); // Car not found
-            return false;
         }
     }
 
@@ -89,7 +84,7 @@ public class ParkingSpace {
      * @return A string representing the location of the car.
      *         Note: This method currently returns a placeholder location.
      */
-    public String findCar(String carNumber) {
+    public Car findCar(String carNumber) {
         // Placeholder implementation; actual search logic to find the car's location is
         // needed
         for (int floor = 0; floor < parkingSpace.length; floor++) {
@@ -97,16 +92,15 @@ public class ParkingSpace {
                 for (int slot = 0; slot < parkingSpace[floor][area].length; slot++) {
                     Car car = parkingSpace[floor][area][slot];
                     if (car != null && car.getCarNumber().equals(carNumber)) {
-                        return "The car is located at Floor " + (floor + 1) + ", Area " + (area + 1) + ", Slot " + (slot + 1) + ".";
+                        return parkingSpace[floor][area][slot];
                     }
                 }
             }
         }
-        return "The car is not found. Maybe the wrong input.";
-//        return "The location of car."; // Example output
+        return null;
     }
 
     public void displayFreeSpace() {
-
+        System.out.println("That's the free space.");
     }
 }
