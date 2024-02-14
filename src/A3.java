@@ -16,8 +16,8 @@ public class A3 {
         ParkingLot parkingLot = new ParkingLot();
 
         while (true) {
-            System.out.println("\n\n\n\nPitions:");
-            System.out.println("0. Display cars");
+            System.out.println("\n\n\nPitions:");
+            System.out.println("0. Display car‘s list");
             System.out.println("1. Save car");
             System.out.println("2. Leave car");
             System.out.println("3. Print price and time");
@@ -62,28 +62,37 @@ public class A3 {
                     String leaveNumber = sc.next();
 
                     Car leaveOfCar = parkingLot.findCar(leaveNumber);
-                    int exitTime = Tools.getTime();
-                    System.out.println("Exit Time: " + exitTime);
-                    System.out.println("Total Time: " + (exitTime - leaveOfCar.getEnterTime()));
 
-                    System.out.println("Your price is($100 per hour): ");
-                    System.out.println(Tools.countPrice(exitTime, leaveOfCar.getEnterTime()));
+                    if (leaveOfCar != null) {
+                        int exitTime = Tools.getTime();
+                        System.out.println("Exit Time: " + exitTime);
+                        System.out.println("Total Time: " + (exitTime - leaveOfCar.getEnterTime()));
 
-                    System.out.println("Leaving your car");
-                    parkingLot.leave(leaveNumber);
+                        System.out.println("Your price is($100 per hour): ");
+                        System.out.println(Tools.countPrice(exitTime, leaveOfCar.getEnterTime()));
+
+                        System.out.println("Leaving your car");
+                        parkingLot.leave(leaveNumber);
+                    } else {
+                        System.out.println("Don't have this car!!!");
+                    }
                     break;
                 case 3:
                     System.out.println("Enter your car number: ");
 
                     String numberOfPrice = sc.next();
                     Car priceOfCar = parkingLot.findCar(numberOfPrice);
-                    int nowTime = Tools.getTime();
+                    if (priceOfCar != null) {
+                        int nowTime = Tools.getTime();
 
-                    System.out.println("Now Time: " + nowTime);
-                    System.out.println("Total Time: " + (nowTime - priceOfCar.getEnterTime()) + " Minutes.");
-                    System.out.println("Your price is($100 per hour): ");
+                        System.out.println("Now Time: " + nowTime);
+                        System.out.println("Total Time: " + (nowTime - priceOfCar.getEnterTime()) + " Minutes.");
+                        System.out.println("Your price is($100 per hour): ");
 
-                    System.out.println(Tools.countPrice(nowTime, priceOfCar.getEnterTime()) + " Dollars.");
+                        System.out.println(Tools.countPrice(nowTime, priceOfCar.getEnterTime()) + " Dollars.");
+                    } else {
+                        System.out.println("Don't have this car!!!");
+                    }
 
                     break;
                 case 4:

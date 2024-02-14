@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
+//import java.util.stream.Collectors;
 
 /**
  * Manages the parking spaces within a parking lot, tracking capacity and
@@ -177,26 +177,19 @@ public class ParkingSpace {
 
         // Print grouped cars by floor
         System.out.println("Parked Cars by Floor:");
-        System.out.println("+-------+-------------------------------------+-------------+");
-        System.out.println("| Floor | Car Numbers                         | Enter Time  |");
-        System.out.println("+-------+-------------------------------------+-------------+");
+        System.out.println("+-------+-------------------------------------+");
+        System.out.println("| Floor | Car Numbers                         |");
+        System.out.println("+-------+-------------------------------------+");
 
         carsByFloor.forEach((floor, carNumbers) -> {
             // Join car numbers into a single string
             String carNumbersStr = String.join(", ", carNumbers);
 
-            // Assuming enter time is the same for simplification, adjust as needed
-            String enterTimes = carNumbers.stream()
-                    .map(carNumber -> findCar(carNumber).getEnterTime() + "") // Convert enter times to string
-                    .distinct() // Remove duplicates, if any
-                    .collect(Collectors.joining(", ")); // Join enter times
-
-            System.out.printf("| %-5d | %-35s | %-11s |%n",
+            System.out.printf("| %-5d | %-35s |%n",
                     floor + 1, // Assuming floors start at 0 internally
-                    carNumbersStr,
-                    enterTimes.length() > 0 ? enterTimes : "N/A"); // Print enter times if available
+                    carNumbersStr);
         });
 
-        System.out.println("+-------+-------------------------------------+-------------+");
+        System.out.println("+-------+-------------------------------------+");
     }
 }

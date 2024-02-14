@@ -43,7 +43,7 @@ public class ParkingLot {
      */
     public boolean leave(String licensePlate) {
         boolean flag;
-        Car leavecar = new Car(licensePlate, 0, null);
+        Car leavecar = this.parkingSpace.findCar(licensePlate);
         flag = this.parkingSpace.leaveCar(leavecar);
         // Implementation needed to remove the car based on license plate
         if (flag == true) {
@@ -67,14 +67,19 @@ public class ParkingLot {
         // Placeholder implementation; needs logic to find and print the car's parking
         // space
         Car yourCar = parkingSpace.findCar(carNumber);
-        Location yourLocation = yourCar.getLocation();
 
-        int yourFloor = yourLocation.getFloor() + 1;
-        String yourArea = yourLocation.getArea();
-        int yourNumber = yourLocation.getSlot();
+        if (yourCar != null) {
+            Location yourLocation = yourCar.getLocation();
 
-        System.out.println(
-                "The car is located at Floor " + yourFloor + ", Area " + yourArea + ", Slot " + yourNumber + ".");
+            int yourFloor = yourLocation.getFloor() + 1;
+            String yourArea = yourLocation.getArea();
+            int yourNumber = yourLocation.getSlot();
+
+            System.out.println(
+                    "The car is located at Floor " + yourFloor + ", Area " + yourArea + ", Slot " + yourNumber + ".");
+        } else {
+            System.out.println("Don't have this car!!!");
+        }
     }
 
     public Car findCar(String carNumber) {
