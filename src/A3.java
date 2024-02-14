@@ -66,7 +66,7 @@ public class A3 {
                     System.out.println("Exit Time: " + exitTime);
                     System.out.println("Total Time: " + (exitTime - leaveOfCar.getEnterTime()));
 
-                    System.out.println("Your price is: ");
+                    System.out.println("Your price is($100 per hour): ");
                     System.out.println(Tools.countPrice(exitTime, leaveOfCar.getEnterTime()));
 
                     System.out.println("Leaving your car");
@@ -81,7 +81,7 @@ public class A3 {
 
                     System.out.println("Now Time: " + nowTime);
                     System.out.println("Total Time: " + (nowTime - priceOfCar.getEnterTime()) + " Minutes.");
-                    System.out.println("Your price is: ");
+                    System.out.println("Your price is($100 per hour): ");
 
                     System.out.println(Tools.countPrice(nowTime, priceOfCar.getEnterTime()) + " Dollars.");
 
