@@ -59,10 +59,22 @@ public class ParkingSpace {
      */
     public boolean leaveCar(Car leaveCar) {
         // Placeholder logic for car removal
+        // String flag = findCar(leaveCar.getCarNumber()); // boolean
+        // Location car_location = leaveCar.getSpace();
+        Location myLocation = leaveCar.getSpace();
+        int myFloor = myLocation.getFloor();
+        int myArea = myLocation.getArea();
+        int myNumber = myLocation.getNumber();
+
         boolean flagOfCar = true; // Assume car is present for demonstration
+
+        if (parkingSpace[myFloor][myArea][myNumber] == null) {
+            flagOfCar = false;
+        }
 
         if (flagOfCar) {
             this.usedParkingSlots--; // Decrement used slots
+            parkingSpace[myFloor][myArea][myNumber] = null;
             return true; // Indicate successful removal
         } else {
             System.out.println("Parking Space doesn't have this car!"); // Car not found
